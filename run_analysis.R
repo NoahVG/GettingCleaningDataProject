@@ -68,5 +68,8 @@ mean_table<-mean_table[,lapply(.SD,mean),.SDcols=variables, by=list(mean_table$V
 setnames(mean_table,mean_table[,1],"VolunteerNumber")
 setnames(mean_table,mean_table[,2],"TypeOfActivity")
 mean_table$type<-ifelse(mean_table$type==1,"train","test")
-#exports table as a text files
+#exports table as a text file
 write.table(mean_table,"table of means.txt",row.name=FALSE)
+#imports and views table from text file
+output<-read.table("table of means.txt",header=TRUE)
+View(output)
