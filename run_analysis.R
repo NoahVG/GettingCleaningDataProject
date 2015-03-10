@@ -46,6 +46,8 @@ data<-rbind(train,test)
 names(data)[1]<-"Volunteer number"
 names(data)[2]<-"Type of activity"
 #gets only mean/std dev cols (any column with a header that contains 'mean' or 'std'), along with the first 3 columns labeling the data
+install.packages("plyr")
+library(plyr)
 install.packages("dplyr")
 library(dplyr)
 data_mean<-select(data,(contains("mean")))
