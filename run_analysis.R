@@ -46,6 +46,7 @@ data<-rbind(train,test)
 names(data)[1]<-"Volunteer number"
 names(data)[2]<-"Type of activity"
 #gets only mean/std dev cols (any column with a header that contains 'mean' or 'std'), along with the first 3 columns labeling the data
+install.packages("dplyr")
 library(dplyr)
 data_mean<-select(data,(contains("mean")))
 data_std_dev<-select(data,contains("std"))
@@ -57,6 +58,8 @@ names(data_mean_std)<-gsub(" ","",names(data_mean_std),)
 data_mean_std$type<-ifelse(data_mean_std$type=="train",1,2)
 
 #creates a table of the means for each volunteer/activity
+install.packages("data.table")
+library(data.table)
 variables<-tail(names(data_mean_std),-2)
 mean_table<-data.table(data_mean_std)
 mean_table<-mean_table[,lapply(.SD,mean),.SDcols=variables, by=list(mean_table$Volunteernumber,mean_table$Typeofactivity)]
